@@ -17,7 +17,7 @@
     </a>
 
     <nav class="main-nav">
-      <button data-scroll="features" data-i18n="homeNav">الرئيسية</button>
+      <button data-scroll="landing" data-i18n="homeNav">الرئيسية</button>
       <button data-scroll="features" data-i18n="featuresNav">المزايا</button>
       <button data-scroll="offers" data-i18n="offersNav">العروض</button>
       <button data-scroll="pricing" data-i18n="pricingNav">الاشتراك</button>
@@ -25,8 +25,8 @@
     </nav>
 
     <div class="header-actions">
-      <button class="icon-btn" id="langBtn">EN</button>
-      <button class="icon-btn" id="themeBtn">☾</button>
+      <button class="icon-btn" id="langBtn" aria-label="Switch language">EN</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">☾</button>
       <button class="primary compact" id="createNav" data-i18n="createAccount">إنشاء حساب</button>
     </div>
   </header>
@@ -40,7 +40,7 @@
 
         <div class="hero-actions">
           <button class="primary large" id="startFree" data-i18n="tryFree">ابدأ 10 أيام مجانًا</button>
-          <button class="secondary large" id="connectGithub">◉ ربط GitHub</button>
+          <button class="secondary large" id="connectGithub"><span data-icon="github"></span> GitHub</button>
         </div>
 
         <div class="hero-points">
@@ -59,11 +59,11 @@
       </div>
     </section>
 
-    <section class="stats-row">
-      <article><span class="stat-icon people">●●</span><div><small data-i18n="connectedRepos">مستودعات GitHub المرتبطة</small><strong>12,480</strong><em>+12%</em></div></article>
-      <article><span class="stat-icon folder">▰</span><div><small data-i18n="openCodeSessions">جلسات OpenCode</small><strong>3,260</strong><em>+18%</em></div></article>
-      <article><span class="stat-icon stack">◆</span><div><small data-i18n="agentRuns">طلبات الـAgent</small><strong>8</strong><em>+2</em></div></article>
-      <article><span class="stat-icon users">◎</span><div><small data-i18n="activeDevelopers">المطورون النشطون</small><strong>4,950</strong><em>+22%</em></div></article>
+    <p class="demo-note" data-i18n="demoNotice"></p><section class="stats-row">
+      <article><span class="stat-icon people" data-icon="github"></span><div><small data-i18n="connectedRepos">مستودعات GitHub المرتبطة</small><strong>—</strong></div></article>
+      <article><span class="stat-icon folder">&lt;/&gt;</span><div><small data-i18n="openCodeSessions">جلسات OpenCode</small><strong>—</strong></div></article>
+      <article><span class="stat-icon stack" data-icon="terminal"></span><div><small data-i18n="agentRuns">طلبات الـAgent</small><strong>—</strong></div></article>
+      <article><span class="stat-icon users" data-icon="code"></span><div><small data-i18n="activeDevelopers">المطورون النشطون</small><strong>—</strong></div></article>
     </section>
 
     <section class="how-it-works">
@@ -72,9 +72,11 @@
         <h2 data-i18n="howTitle">ثلاث خطوات وتبدأ البرمجة</h2>
       </div>
       <div class="steps">
-        <article><span>1</span><div><b data-i18n="howOne">اربط GitHub</b><small data-i18n="howOneText">اختر حسابك والمستودع الذي تريد العمل عليه.</small></div></article>
-        <article><span>2</span><div><b data-i18n="howTwo">اختر المشروع والفرع</b><small data-i18n="howTwoText">OpenCode Gateway يجهز مساحة العمل للمشروع.</small></div></article>
-        <article><span>3</span><div><b data-i18n="howThree">اكتب طلبك لـ OpenCode</b><small data-i18n="howThreeText">راجع الملفات المعدلة ثم Commit وPush إلى GitHub.</small></div></article>
+        <article><span data-icon="github"></span><div><b data-i18n="howOne"></b><small>01 · GitHub</small></div></article>
+        <article><span data-icon="branch"></span><div><b data-i18n="howTwo"></b><small>02 · Repository / Branch</small></div></article>
+        <article><span data-icon="terminal"></span><div><b>OpenCode</b><small data-i18n="ownProvider"></small></div></article>
+        <article><span data-icon="code"></span><div><b data-i18n="reviewChanges"></b><small>04 · Files / Diff / Logs</small></div></article>
+        <article><span data-icon="branch"></span><div><b>Commit / Push</b><small>05 · GitHub</small></div></article>
       </div>
     </section>
 
@@ -153,7 +155,14 @@ app.get('/', (c) =&gt; {
   <main id="authPage" class="page auth-page">
     <section class="auth-shell">
       <div class="auth-visual">
-        <img src="./assets/yemen-hero.svg" alt="Yemen and OpenCode" />
+        <div class="auth-terminal" dir="ltr"><div><span data-icon="github"></span> GitHub &nbsp; → &nbsp; &lt;/&gt; OpenCode</div><pre>$ git switch ui-redesign
+✓ repository selected
+✓ branch selected
+
+$ opencode
+&gt; Describe your next change
+
+Review diff → Commit → Push</pre></div>
         <div class="auth-overlay">
           <div class="auth-code-mark">&lt;/&gt;</div>
           <h2 data-i18n="authSideTitle">من GitHub إلى OpenCode في خطوات بسيطة</h2>
@@ -171,7 +180,7 @@ app.get('/', (c) =&gt; {
         <button class="back-btn" id="backFromAuth">← <span data-i18n="back">رجوع</span></button>
         <div class="auth-brand"><span class="brand-icon">&lt;/&gt;</span><div><strong>OpenCode Gateway</strong><small data-i18n="tagline">من مشروعك إلى OpenCode مباشرة</small></div></div>
 
-        <div class="auth-tabs">
+        <p class="demo-note" data-i18n="authDemo"></p><div class="auth-tabs">
           <button class="active" id="registerTab" data-i18n="createAccount">إنشاء حساب</button>
           <button id="loginTab" data-i18n="login">تسجيل الدخول</button>
         </div>
@@ -187,7 +196,7 @@ app.get('/', (c) =&gt; {
           <label data-i18n="phone">رقم الهاتف *</label><input type="tel" required />
           <label data-i18n="password">كلمة المرور *</label><input type="password" required />
           <button class="primary wide" type="submit" data-i18n="createAndContinue">إنشاء الحساب والمتابعة</button>
-          <button class="secondary wide" type="button" id="githubRegister">◉ GitHub</button>
+          <button class="secondary wide" type="button" id="githubRegister"><span data-icon="github"></span> GitHub</button>
         </form>
 
         <form id="loginForm" class="auth-form">
@@ -208,22 +217,22 @@ app.get('/', (c) =&gt; {
         <div class="side-logo"><span class="brand-icon">&lt;/&gt;</span><b>OpenCode Gateway</b></div>
         <button class="new-session">＋ <span data-i18n="newSession">جلسة جديدة</span></button>
         <small class="side-label" data-i18n="sessions">الجلسات</small>
-        <button class="session active"><span>M</span><div><b>Madarasati</b><small>qoder-test</small></div></button>
+        <button class="session active"><span>M</span><div><b id="sessionRepo">OpenCode Gateway</b><small id="sessionBranch">ui-redesign</small></div></button>
         <div class="side-spacer"></div>
-        <button class="side-link">GitHub ✓</button>
+        <button class="side-link" id="workspaceGithub">GitHub · Demo</button>
         <button class="side-link" id="backLanding" data-i18n="homeNav">الرئيسية</button>
       </aside>
       <div class="workspace-main">
-        <div class="project-bar"><div><b>Madarasati</b><small>diirzoro/madrasati · qoder-test</small></div><div><span class="connection">● GitHub</span><span class="trial-pill">10 <span data-i18n="days">أيام</span></span></div></div>
+        <div class="project-bar"><div class="repo-controls"><label for="repoSelect">Repository</label><select id="repoSelect"><option>diirzoro/opencode-gateway</option><option>diirzoro/madrasati</option></select><label for="branchSelect">Branch</label><select id="branchSelect"><option>ui-redesign</option><option>qoder-test</option></select></div><div><span class="connection">● GitHub</span><span class="trial-pill">10 <span data-i18n="days">أيام</span></span></div></div>
         <div class="agent-layout">
           <section class="agent-panel">
             <div class="agent-feed">
               <div class="agent-message"><span>Agent</span><h3 data-i18n="agentWelcome">ماذا تريد أن تعدل في مشروعك؟</h3><p data-i18n="agentHint">ستظهر هنا ردود OpenCode، الملفات المعدلة، ونتائج الأوامر.</p></div>
               <div class="result-card">✓ <span data-i18n="readyToStart">جاهز لبدء جلسة جديدة</span></div>
             </div>
-            <div class="prompt-box"><textarea id="promptInput" data-i18n-placeholder="promptPlaceholder" placeholder="اكتب طلبك هنا..."></textarea><div><button class="tiny-btn">＋</button><span class="agent-mode">Agent</span><button class="primary compact" id="sendPrompt" data-i18n="send">إرسال</button></div></div>
+            <div class="prompt-box"><textarea id="promptInput" aria-label="Agent prompt" data-i18n-placeholder="promptPlaceholder" placeholder="اكتب طلبك هنا..."></textarea><div><button class="tiny-btn">＋</button><span class="agent-mode">Agent</span><button class="primary compact" id="sendPrompt" data-i18n="send">إرسال</button></div></div>
           </section>
-          <aside class="changes-panel"><div class="changes-head"><b data-i18n="changes">التغييرات</b><span>0 files</span></div><div class="changes-empty" data-i18n="noChanges">لا توجد تغييرات بعد</div><div class="change-tabs"><button>Files</button><button>Diff</button><button>Logs</button></div></aside>
+          <aside class="changes-panel"><div class="changes-head"><b data-i18n="changes">التغييرات</b><span>0 files</span></div><div class="change-tabs" role="tablist" aria-label="Changes"><button data-change-tab="files" role="tab" aria-selected="true">Files</button><button data-change-tab="diff" role="tab" aria-selected="false">Diff</button><button data-change-tab="logs" role="tab" aria-selected="false">Logs</button></div><div id="changeContent" class="changes-empty" role="tabpanel"></div><div class="review-actions"><button class="secondary" id="viewDiff">View Diff</button><button class="secondary" id="commitChanges" disabled>Commit</button><button class="primary" id="pushChanges" disabled>Push</button><small data-i18n="backendNeeded"></small></div></aside>
         </div>
       </div>
     </div>
