@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OpenCode Gateway</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">OC</div>
+        <div>
+          <div class="brand-title">OpenCode Gateway</div>
+          <div class="brand-sub">Your GitHub. Your AI. Your Code.</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboard">◫ <span>Dashboard</span></button>
+        <button class="nav-item" data-view="projects">⌘ <span>Projects</span></button>
+        <button class="nav-item" data-view="providers">✦ <span>AI Providers</span></button>
+        <button class="nav-item" data-view="admin">⚙ <span>Admin</span></button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="status-dot"></div>
+        <div>
+          <strong>OpenCode Online</strong>
+          <small id="serverStatus">Checking server…</small>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1 id="pageTitle">Dashboard</h1>
+          <p id="pageSubtitle">Start coding from anywhere.</p>
+        </div>
+        <div class="top-actions">
+          <button class="ghost" id="themeToggle">☾</button>
+          <div class="avatar">T</div>
+        </div>
+      </header>
+
+      <section id="dashboard" class="view active">
+        <div class="hero card">
+          <div class="hero-copy">
+            <span class="eyebrow">Hosted OpenCode</span>
+            <h2>Open your project. Connect your AI. Start coding.</h2>
+            <p>No local setup. No IDE installation. Your project remains in your GitHub account.</p>
+            <div class="hero-actions">
+              <button class="primary" id="connectGithub">Connect GitHub</button>
+              <button class="secondary" id="launchOpenCode">Launch OpenCode</button>
+            </div>
+          </div>
+          <div class="hero-orbit">
+            <div class="orbit core">OC</div>
+            <div class="orbit item github">GH</div>
+            <div class="orbit item ai">AI</div>
+            <div class="orbit item code">&lt;/&gt;</div>
+          </div>
+        </div>
+
+        <div class="grid stats">
+          <div class="card stat">
+            <span>OpenCode</span>
+            <strong>Ready</strong>
+            <small>Web service available</small>
+          </div>
+          <div class="card stat">
+            <span>GitHub</span>
+            <strong id="githubState">Not connected</strong>
+            <small>OAuth integration next</small>
+          </div>
+          <div class="card stat">
+            <span>Active project</span>
+            <strong>Madarasati</strong>
+            <small>Private test workspace</small>
+          </div>
+          <div class="card stat">
+            <span>Plan</span>
+            <strong>Owner / Test</strong>
+            <small>Billing disabled</small>
+          </div>
+        </div>
+
+        <div class="grid content-grid">
+          <div class="card project-card">
+            <div class="card-head">
+              <div>
+                <span class="eyebrow">Quick launch</span>
+                <h3>Madarasati</h3>
+              </div>
+              <span class="pill">qoder-test</span>
+            </div>
+
+            <label>Repository</label>
+            <select id="repoSelect">
+              <option>diirzoro/madrasati</option>
+            </select>
+
+            <label>Branch</label>
+            <select id="branchSelect">
+              <option>qoder-test</option>
+              <option>main</option>
+            </select>
+
+            <button class="primary wide" id="launchProject">Launch in OpenCode</button>
+          </div>
+
+          <div class="card ad-card">
+            <div class="card-head">
+              <div>
+                <span class="eyebrow">Sponsored</span>
+                <h3 id="adTitle">Your future ad space</h3>
+              </div>
+              <span class="pill muted">Admin controlled</span>
+            </div>
+            <p id="adText">A small, clean ad area that you can later manage from the admin section.</p>
+            <a id="adLink" href="#" target="_blank" rel="noopener">Learn more →</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="view">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Projects</span>
+            <h2>Your connected repositories</h2>
+          </div>
+          <button class="primary" id="connectGithub2">Connect GitHub</button>
+        </div>
+        <div class="card empty-state">
+          <div class="big-icon">⌘</div>
+          <h3>GitHub connector is the next step</h3>
+          <p>Once connected, repositories and branches will appear here automatically.</p>
+        </div>
+      </section>
+
+      <section id="providers" class="view">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">AI</span>
+            <h2>Use OpenCode’s own provider setup</h2>
+          </div>
+        </div>
+        <div class="grid provider-grid">
+          <div class="card provider"><strong>OpenAI / Codex</strong><span>Use OpenCode settings</span></div>
+          <div class="card provider"><strong>DeepSeek</strong><span>Use your own API</span></div>
+          <div class="card provider"><strong>Gemini</strong><span>Use your own API</span></div>
+          <div class="card provider"><strong>Other providers</strong><span>Managed inside OpenCode</span></div>
+        </div>
+        <button class="primary" id="openProviders">Open OpenCode Settings</button>
+      </section>
+
+      <section id="admin" class="view">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Admin</span>
+            <h2>Small control center</h2>
+          </div>
+          <span class="pill">Owner only</span>
+        </div>
+
+        <div class="grid admin-grid">
+          <div class="card">
+            <h3>Advertisement</h3>
+            <label>Title</label>
+            <input id="adminAdTitle" value="Your future ad space" />
+            <label>Text</label>
+            <textarea id="adminAdText">A small, clean ad area that you can later manage from the admin section.</textarea>
+            <label>Link</label>
+            <input id="adminAdLink" value="#" />
+            <button class="primary wide" id="saveAd">Save ad</button>
+          </div>
+
+          <div class="card">
+            <h3>Gateway settings</h3>
+            <label>OpenCode URL</label>
+            <input id="serverUrl" />
+            <label>Display name</label>
+            <input id="displayName" value="OpenCode Gateway" />
+            <button class="secondary wide" id="saveSettings">Save settings</button>
+            <p class="hint">For now settings are stored only in this browser. Later they can move to PostgreSQL.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span>OpenCode Gateway MVP</span>
+        <span>Built for a lightweight hosted workflow</span>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
