@@ -1,15 +1,44 @@
-# OpenCode Gateway UI preview
+# OpenCode Gateway visual prototype
 
-Dependency-free Arabic/English, RTL/LTR frontend. Run:
+**Hosted OpenCode. Your GitHub. Your AI.**
 
-```bash
-python3 -m http.server 3000 --bind 0.0.0.0
+This repository contains a lightweight, dependency-free product prototype for
+the complete OpenCode Gateway journey:
+
+```text
+Landing → GitHub preview → repository/branch → OpenCode workspace
+        → Agent → Files/Diff/Logs → Commit/Push preview
 ```
 
-Open http://localhost:3000. The landing page has no sidebar; the workspace has a compact sessions sidebar, repository/branch preview selectors, prompt preview, Files/Diff/Logs, and review controls. Light/dark mode and language preferences persist locally.
+The hybrid design uses a clear pipeline on the public and onboarding screens,
+a mission-control desktop workspace, and an agent-first mobile workspace.
 
-## Integration status
+## Preview locally
 
-This branch is a design prototype. Login/register open the workspace preview and discard form inputs; they do not authenticate or save credentials. GitHub OAuth, repository/branch APIs, OpenCode execution, account/trial/billing services and live metrics are not implemented. Repository selections are examples. Commit and Push stay disabled until backend integration; prompt messages explicitly report that no commands were executed. The 10-day offer is marketing copy, not an active trial service.
+```bash
+python3 -m http.server 4173
+```
 
-The only Yemen illustration is the local hero SVG; authentication uses a coding terminal illustration instead. Assets work without external image/CDN dependencies. config.js retains the existing OpenCode endpoint for future integration.
+Open <http://localhost:4173>. Use **Connect GitHub** for the onboarding flow or
+**View workspace** to go directly to the coding workspace.
+
+## Prototype boundaries
+
+- All GitHub, OpenCode, agent, commit, and push behaviors are simulations.
+- No form credentials, source files, prompts, or secrets are transmitted.
+- Commit and push buttons only display preview feedback.
+- Language and theme preferences are the only values stored, using
+  `localStorage` in the browser.
+- The prototype supports Arabic/RTL, English/LTR, light mode, dark mode, and
+  dedicated desktop and mobile workspace layouts.
+
+## Files
+
+- `index.html` — landing, onboarding, and workspace surfaces.
+- `styles.css` — visual system, themes, responsive layouts, and mobile sheets.
+- `app.js` — localization and simulated prototype interactions.
+- `assets/yemen-hero.svg` — the single Yemen/Sana'a visual, used only in the hero.
+- `reference/original-prototype/` — snapshot of the previous prototype kept for
+  comparison and rollback reference.
+
+No build step or package installation is required.

@@ -1,4 +1,3 @@
-window.OPENCODE_CONFIG = {
-  // Change this later when you add a domain / HTTPS.
-  openCodeUrl: "http://162.35.127.135:4096"
-};
+// The visual prototype deliberately has no remote service configuration.
+// OpenCode and GitHub interactions are simulated locally in app.js.
+window.OPENCODE_CONFIG = Object.freeze({ previewOnly: true });
