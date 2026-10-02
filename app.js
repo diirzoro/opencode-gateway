@@ -1,77 +1,17 @@
-const cfg = window.OPENCODE_CONFIG || {};
-const state = {
-  openCodeUrl: localStorage.getItem("openCodeUrl") || cfg.openCodeUrl || "http://127.0.0.1:4096"
-};
-
-const $ = (id) => document.getElementById(id);
-const toast = (msg) => {
-  const el = $("toast");
-  el.textContent = msg;
-  el.classList.add("show");
-  setTimeout(() => el.classList.remove("show"), 2200);
-};
-
-document.querySelectorAll(".nav-item").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".nav-item").forEach(x => x.classList.remove("active"));
-    document.querySelectorAll(".view").forEach(x => x.classList.remove("active"));
-    btn.classList.add("active");
-    $(btn.dataset.view).classList.add("active");
-    $("pageTitle").textContent = btn.querySelector("span").textContent;
-    $("pageSubtitle").textContent =
-      btn.dataset.view === "dashboard" ? "Start coding from anywhere." :
-      btn.dataset.view === "projects" ? "Connect and open your repositories." :
-      btn.dataset.view === "providers" ? "Bring your own AI provider." :
-      "Manage the lightweight gateway.";
-  });
-});
-
-function launchOpenCode() {
-  window.open(state.openCodeUrl, "_blank", "noopener");
-}
-["launchOpenCode","launchProject","openProviders"].forEach(id => $(id).addEventListener("click", launchOpenCode));
-
-["connectGithub","connectGithub2"].forEach(id => $(id).addEventListener("click", () => {
-  toast("GitHub OAuth will be connected in the next step.");
-}));
-
-$("serverUrl").value = state.openCodeUrl;
-$("saveSettings").addEventListener("click", () => {
-  state.openCodeUrl = $("serverUrl").value.trim();
-  localStorage.setItem("openCodeUrl", state.openCodeUrl);
-  toast("Gateway settings saved in this browser.");
-});
-
-$("saveAd").addEventListener("click", () => {
-  $("adTitle").textContent = $("adminAdTitle").value;
-  $("adText").textContent = $("adminAdText").value;
-  $("adLink").href = $("adminAdLink").value || "#";
-  localStorage.setItem("adTitle", $("adminAdTitle").value);
-  localStorage.setItem("adText", $("adminAdText").value);
-  localStorage.setItem("adLink", $("adminAdLink").value);
-  toast("Ad updated.");
-});
-
-const savedAdTitle = localStorage.getItem("adTitle");
-const savedAdText = localStorage.getItem("adText");
-const savedAdLink = localStorage.getItem("adLink");
-if (savedAdTitle) $("adTitle").textContent = $("adminAdTitle").value = savedAdTitle;
-if (savedAdText) $("adText").textContent = $("adminAdText").value = savedAdText;
-if (savedAdLink) $("adLink").href = $("adminAdLink").value = savedAdLink;
-
-$("themeToggle").addEventListener("click", () => {
-  document.documentElement.classList.toggle("light");
-  $("themeToggle").textContent = document.documentElement.classList.contains("light") ? "☀" : "☾";
-});
-
-async function checkServer() {
-  // Cross-origin responses may be blocked before CORS is configured,
-  // so this is a friendly visual indicator rather than a hard health check.
-  try {
-    await fetch(state.openCodeUrl, { mode: "no-cors", cache: "no-store" });
-    $("serverStatus").textContent = "Server reachable";
-  } catch {
-    $("serverStatus").textContent = "Server status unknown";
-  }
-}
-checkServer();
+const cfg=window.OPENCODE_CONFIG||{};let lang=localStorage.getItem("og-lang")||"ar";let dark=localStorage.getItem("og-theme")==="dark";
+const $=id=>document.getElementById(id);const toast=msg=>{const e=$("toast");e.textContent=msg;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1800)};
+const t={ar:{announce:"جرّب OpenCode Gateway مجانًا لمدة 10 أيام",tagline:"GitHub لك. AI لك. كودك لك.",navFeatures:"المزايا",navOffers:"العروض",navPricing:"الاشتراك",login:"تسجيل الدخول",createAccount:"إنشاء حساب",heroKicker:"OpenCode على الويب",heroTitle:"برمج من أي مكان، بحسابك ومشروعك",heroText:"اربط GitHub، افتح OpenCode من المتصفح، واستخدم مزود الذكاء الاصطناعي الخاص بك بدون تعقيد.",tryFree:"جرّب 10 أيام مجانًا",noInstall:"لا حاجة للتثبيت",anyDevice:"يعمل من أي جهاز",ownAI:"مزود الذكاء الاصطناعي الخاص بك",yemenCaption:"من اليمن إلى كل مبرمج",registeredUsers:"مستخدم مسجل",activeUsers:"مستخدم نشط",activeProjects:"مشروع نشط",services:"خدمات متاحة",why:"لماذا OpenCode Gateway؟",simpleTools:"كل ما تحتاجه، بشكل بسيط",githubFeature:"مشروعك يبقى في حساب GitHub الخاص بك.",openCodeFeature:"استخدم OpenCode كاملًا من المتصفح.",yourProvider:"مزودك الخاص",providerFeature:"اربط المزود أو الـAPI الخاص بك من داخل OpenCode.",anywhere:"من أي مكان",mobileFeature:"واجهة Mobile-first تعمل من الهاتف والكمبيوتر.",limitedOffer:"عرض تجريبي",tenDays:"10 أيام مجانًا",trialText:"اختبر OpenCode Gateway واربط مشروعك قبل اختيار أي خطة مدفوعة.",startTrial:"ابدأ التجربة",smallAd:"إعلان صغير",adTitle:"مساحة لعروض وخدمات المطورين",adText:"يمكن للإدارة لاحقًا تغيير هذا الإعلان بدون التأثير على تجربة الاستخدام.",learnMore:"اعرف أكثر ←",subscription:"الاشتراك",startSimple:"ابدأ بسيطًا ووسّع لاحقًا",pricingText:"10 أيام مجانية، وبعدها تختار الخطة التي تناسب استخدامك.",seePlans:"ابدأ الآن",footer:"واجهة خفيفة فوق OpenCode",newSession:"جلسة جديدة",sessions:"الجلسات",home:"الرئيسية",days:"أيام",workspaceWelcome:"مرحبًا بك في مساحة العمل",workspaceHint:"اكتب طلبك بالأسفل. ستظهر هنا نتائج OpenCode والملفات التي تم تعديلها.",changesReady:"التغييرات ستظهر هنا بعد تشغيل الـAgent",promptPlaceholder:"اكتب ما تريد تعديله في المشروع...",send:"إرسال",changes:"التغييرات",noChanges:"لا توجد تغييرات بعد",authSubtitle:"ابدأ تجربتك المجانية واربط مشروعك.",username:"اسم المستخدم",email:"البريد الإلكتروني",password:"كلمة المرور",phone:"رقم الهاتف",country:"البلد",createAndContinue:"إنشاء الحساب والمتابعة",already:"لديك حساب؟ تسجيل الدخول"},
+en:{announce:"Try OpenCode Gateway free for 10 days",tagline:"Your GitHub. Your AI. Your Code.",navFeatures:"Features",navOffers:"Offers",navPricing:"Subscription",login:"Login",createAccount:"Create account",heroKicker:"OpenCode on the web",heroTitle:"Code from anywhere, with your account and your project",heroText:"Connect GitHub, open OpenCode in the browser, and use your own AI provider without complexity.",tryFree:"Try 10 days free",noInstall:"No installation",anyDevice:"Works on any device",ownAI:"Your own AI provider",yemenCaption:"From Yemen to every developer",registeredUsers:"Registered users",activeUsers:"Active users",activeProjects:"Active projects",services:"Available services",why:"Why OpenCode Gateway?",simpleTools:"Everything you need, kept simple",githubFeature:"Your project stays in your own GitHub account.",openCodeFeature:"Use the full OpenCode experience from the browser.",yourProvider:"Your provider",providerFeature:"Connect your provider or API from inside OpenCode.",anywhere:"Anywhere",mobileFeature:"Mobile-first experience for phone and desktop.",limitedOffer:"Trial offer",tenDays:"10 days free",trialText:"Test OpenCode Gateway and connect your project before choosing any paid plan.",startTrial:"Start trial",smallAd:"Small ad",adTitle:"A place for developer offers and services",adText:"Admin can later change this without affecting the core experience.",learnMore:"Learn more →",subscription:"Subscription",startSimple:"Start simple and grow later",pricingText:"10 free days, then choose the plan that fits your usage.",seePlans:"Start now",footer:"A lightweight layer above OpenCode",newSession:"New session",sessions:"Sessions",home:"Home",days:"days",workspaceWelcome:"Welcome to your workspace",workspaceHint:"Type your request below. OpenCode results and changed files will appear here.",changesReady:"Changes will appear here after the agent runs",promptPlaceholder:"Describe what you want changed in the project...",send:"Send",changes:"Changes",noChanges:"No changes yet",authSubtitle:"Start your free trial and connect your project.",username:"Username",email:"Email",password:"Password",phone:"Phone number",country:"Country",createAndContinue:"Create account and continue",already:"Already have an account? Login"}};
+function applyLang(){document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";document.querySelectorAll("[data-i18n]").forEach(e=>{const k=e.dataset.i18n;if(t[lang][k])e.textContent=t[lang][k]});document.querySelectorAll("[data-i18n-placeholder]").forEach(e=>{const k=e.dataset.i18nPlaceholder;if(t[lang][k])e.placeholder=t[lang][k]});$("langBtn").textContent=lang==="ar"?"EN":"AR";localStorage.setItem("og-lang",lang)}
+function applyTheme(){document.documentElement.classList.toggle("dark",dark);$("themeBtn").textContent=dark?"☀":"☾";localStorage.setItem("og-theme",dark?"dark":"light")}
+function openAuth(){ $("authModal").classList.add("open") }function closeAuth(){ $("authModal").classList.remove("open") }
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));$(id).classList.add("active");window.scrollTo(0,0)}
+$("langBtn").onclick=()=>{lang=lang==="ar"?"en":"ar";applyLang()};$("themeBtn").onclick=()=>{dark=!dark;applyTheme()};
+["registerBtn","trialBtn","githubBtn","loginBtn"].forEach(id=>$(id).onclick=openAuth);document.querySelectorAll("[data-auth-action]").forEach(b=>b.onclick=openAuth);
+$("closeModal").onclick=closeAuth;$("authModal").onclick=e=>{if(e.target===$("authModal"))closeAuth()};
+document.querySelectorAll("[data-scroll]").forEach(b=>b.onclick=()=>$(b.dataset.scroll).scrollIntoView({behavior:"smooth"}));
+$("registerForm").onsubmit=e=>{e.preventDefault();closeAuth();showPage("workspace");toast(lang==="ar"?"تم إنشاء حساب تجريبي محليًا":"Local trial account created")};
+$("githubSignup").onclick=()=>toast(lang==="ar"?"سيتم ربط GitHub OAuth في الخطوة التالية":"GitHub OAuth will be connected next");
+$("backLanding").onclick=()=>showPage("landing");
+$("sendPrompt").onclick=()=>{const v=$("promptInput").value.trim();if(!v)return;toast(lang==="ar"?"تم إرسال الطلب إلى نموذج الواجهة التجريبية":"Prompt sent to the prototype UI");$("promptInput").value=""};
+applyLang();applyTheme();
