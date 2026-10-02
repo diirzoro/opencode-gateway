@@ -1,77 +1,41 @@
-const cfg = window.OPENCODE_CONFIG || {};
-const state = {
-  openCodeUrl: localStorage.getItem("openCodeUrl") || cfg.openCodeUrl || "http://127.0.0.1:4096"
+const $=(q,root=document)=>root.querySelector(q), $$=(q,root=document)=>[...root.querySelectorAll(q)];
+let lang=localStorage.getItem('og-lang')||'ar', dark=localStorage.getItem('og-theme')==='dark';
+const copy={
+ ar:{how:'كيف يعمل',workspace:'مساحة العمل',connect:'اربط GitHub',heroTitle:'من فرع GitHub إلى تغيير جاهز للمراجعة.',heroBody:'افتح مشروعك في مساحة OpenCode مؤقتة، اطلب التغيير من Agent، راجع كل ملف، ثم أعده إلى GitHub.',seeDemo:'شاهد مساحة العمل',sourceTruth:'GitHub يبقى مصدر الحقيقة',ownAi:'استخدم مزود AI الخاص بك',miniTask:'سأحسّن تجربة مساحة العمل على الهاتف.',fromYemen:'من اليمن',forDev:'للمطورين في كل مكان',pipe1:'اربط حسابك',repo:'المستودع',tempSpace:'مساحة مؤقتة',askChange:'اطلب التغيير',review:'المراجعة',backGithub:'إلى GitHub',onePlace:'مكان واحد من الطلب إلى الـPush.',onePlaceBody:'المحادثة في المنتصف، سياق المشروع دائمًا واضح، والمراجعة بجانبك عندما تحتاجها.',shotQuestion:'حسّن تجربة الهاتف بدون تغيير سطح المكتب',prompt:'اطلب تغييرًا جديدًا…',temporary:'مساحات مؤقتة',temporaryBody:'اعمل على نسخة معزولة، بينما يبقى الكود الدائم في GitHub.',yourModel:'ذكاؤك الاصطناعي',yourModelBody:'اربط المزود الذي تختاره عبر OpenCode.',reviewFirst:'راجع قبل الإرسال',reviewFirstBody:'شاهد الملفات والفرق والسجلات قبل Commit وPush.',ready:'مشروعك التالي جاهز لـOpenCode.',previewOnly:'هذه معاينة تفاعلية؛ لا يوجد اتصال فعلي بعد.',startFlow:'ابدأ المسار',setup:'إعداد مساحة جديدة',fewSteps:'من GitHub إلى OpenCode في خطوات قليلة.',setupBody:'نحفظ اختيار المشروع فقط. ملفات العمل تبقى مؤقتة وGitHub هو المصدر الدائم.',account:'الحساب',project:'المشروع',back:'رجوع',connectTitle:'اربط GitHub للبدء',connectBody:'سنطلب الوصول للمستودعات التي تختارها فقط. هذه الخطوة تجريبية الآن.',continueGithub:'المتابعة باستخدام GitHub',noRealData:'معاينة فقط — لا تُدخل أي بيانات حقيقية.',chooseProject:'اختر المشروع والفرع',chooseBody:'هذا يحدد سياق مساحة العمل المؤقتة.',continue:'متابعة',readyTitle:'كل شيء جاهز.',mockConnected:'متصل تجريبيًا',readyState:'جاهز',openSpace:'افتح مساحة العمل',newSession:'جلسة جديدة',sessions:'الجلسات',home:'الرئيسية',settings:'الإعدادات',tempWorkspace:'مساحة مؤقتة',today:'اليوم',agentHello:'ما الذي تريد تغييره في مشروعك؟',agentHelp:'أصف المهمة وسأعرض خطوات التنفيذ، الملفات المعدّلة، ونتائج الفحص هنا.',suggest1:'حسّن تجربة الهاتف',suggest2:'راجع بنية المشروع',suggest3:'أصلح مشكلة في الواجهة',workspaceReady:'مساحة العمل جاهزة',readyHint:'تم تجهيز المشروع والفرع للمعاينة.',changes:'التغييرات',viewChanges:'عرض التغييرات',simulation:'محاكاة واجهة فقط — لن يتم إرسال أي تغيير.'},
+ en:{how:'How it works',workspace:'Workspace',connect:'Connect GitHub',heroTitle:'Connect GitHub. Open your project in OpenCode. Code with your AI.',heroBody:'Open your project in a temporary OpenCode workspace, ask the Agent for a change, review every file, then return it to GitHub.',seeDemo:'View workspace',sourceTruth:'GitHub stays the source of truth',ownAi:'Bring your own AI provider',miniTask:'I’ll improve the mobile workspace experience.',fromYemen:'From Yemen',forDev:'For developers everywhere',pipe1:'Connect account',repo:'Repository',tempSpace:'Temporary space',askChange:'Ask for a change',review:'Review',backGithub:'Back to GitHub',onePlace:'One place from prompt to push.',onePlaceBody:'The conversation stays central, project context is always clear, and review is ready when you need it.',shotQuestion:'Improve mobile without changing desktop',prompt:'Ask for a new change…',temporary:'Temporary workspaces',temporaryBody:'Work in an isolated checkout while permanent code stays on GitHub.',yourModel:'Your AI',yourModelBody:'Connect the provider you choose through OpenCode.',reviewFirst:'Review before push',reviewFirstBody:'See files, diffs, and logs before commit and push.',ready:'Your next project is ready for OpenCode.',previewOnly:'Interactive preview only; no services are connected yet.',startFlow:'Start the flow',setup:'NEW WORKSPACE SETUP',fewSteps:'From GitHub to OpenCode in a few steps.',setupBody:'We retain only project choices. Workspace files are temporary and GitHub stays permanent.',account:'Account',project:'Project',back:'Back',connectTitle:'Connect GitHub to begin',connectBody:'We will request access only to repositories you select. This step is simulated now.',continueGithub:'Continue with GitHub',noRealData:'Preview only — do not enter real information.',chooseProject:'Choose project and branch',chooseBody:'This defines the temporary workspace context.',continue:'Continue',readyTitle:'Everything is ready.',mockConnected:'Preview connected',readyState:'Ready',openSpace:'Open workspace',newSession:'New session',sessions:'Sessions',home:'Home',settings:'Settings',tempWorkspace:'Temporary workspace',today:'Today',agentHello:'What would you like to change?',agentHelp:'Describe the task and I’ll show execution steps, changed files, and check results here.',suggest1:'Improve the mobile experience',suggest2:'Review project structure',suggest3:'Fix a UI issue',workspaceReady:'Workspace ready',readyHint:'The project and branch are prepared for preview.',changes:'Changes',viewChanges:'View changes',simulation:'UI simulation only — no changes will be sent.'}
 };
+function applyPrefs(){document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';document.documentElement.classList.toggle('dark',dark);$$('[data-i18n]').forEach(el=>{if(copy[lang][el.dataset.i18n])el.textContent=copy[lang][el.dataset.i18n]});$$('[data-i18n-placeholder]').forEach(el=>el.placeholder=copy[lang][el.dataset.i18nPlaceholder]||'');$$('#langBtn,.lang-mirror').forEach(el=>el.textContent=lang==='ar'?'EN':'AR');localStorage.setItem('og-lang',lang);localStorage.setItem('og-theme',dark?'dark':'light')}
+function page(id){$$('.page').forEach(p=>p.classList.remove('active'));$('#'+id).classList.add('active');$('#siteHeader').style.display=id==='landing'?'flex':'none';window.scrollTo(0,0)}
+function toast(text){$('#toast').textContent=text;$('#toast').classList.add('show');setTimeout(()=>$('#toast').classList.remove('show'),1800)}
+$$('[data-go]').forEach(b=>b.onclick=()=>page(b.dataset.go));$$('[data-start]').forEach(b=>b.onclick=()=>page('authPage'));$$('[data-demo]').forEach(b=>b.onclick=()=>page('workspacePage'));$$('[data-scroll]').forEach(b=>b.onclick=()=>$('#'+b.dataset.scroll).scrollIntoView({behavior:'smooth'}));
+$$('[data-auth-tab]').forEach(button=>button.onclick=()=>{$$('[data-auth-tab]').forEach(item=>item.classList.toggle('active',item===button));$$('[data-auth-form]').forEach(form=>form.classList.toggle('active',form.dataset.authForm===button.dataset.authTab))});$$('[data-auth-continue]').forEach(button=>button.onclick=()=>{page('onboarding');step(1)});
+$$('[data-payment]').forEach(button=>button.onclick=()=>{$$('[data-payment]').forEach(item=>item.classList.toggle('active',item===button));$$('[data-payment-panel]').forEach(panel=>panel.classList.toggle('active',panel.dataset.paymentPanel===button.dataset.payment))});$$('[data-preview-action]').forEach(button=>button.onclick=()=>toast(lang==='ar'?'معاينة واجهة فقط — لم يتم إرسال أي دفعة':'UI preview only — no payment was submitted'));
+function toggleLang(){lang=lang==='ar'?'en':'ar';applyPrefs()}function toggleTheme(){dark=!dark;applyPrefs()}$('#langBtn').onclick=toggleLang;$('.lang-mirror').onclick=toggleLang;$('#themeBtn').onclick=toggleTheme;$('.theme-mirror').onclick=toggleTheme;$('.workspace-theme').onclick=toggleTheme;
+function step(n){$$('.step-pane').forEach((p,i)=>p.classList.toggle('active',i===n-1));$('#storyGit').classList.toggle('done',n>1);$('#storyRepo').classList.toggle('done',n>2);$('#storyOpen').classList.toggle('done',n>3)}
+$('#mockConnect').onclick=()=>{step(2);toast(lang==='ar'?'تمت محاكاة اتصال GitHub':'GitHub connection simulated')};$('#projectNext').onclick=()=>{$('#readyRepo').textContent=$('#onboardRepo').value;$('#readyBranch').textContent=$('#onboardBranch').value;step(3)};$('#openWorkspace').onclick=()=>{$('#workspaceRepo').textContent=$('#onboardRepo').value;$('#workspaceBranch').textContent=$('#onboardBranch').value;page('workspacePage')};
+const views={files:`<div class="file-item"><span>styles.css</span><i>+42 −8</i></div><div class="file-item"><span>app.js</span><i>+18 −4</i></div><div class="file-item"><span>index.html</span><i>+12 −2</i></div>`,diff:`<div class="diff-view">@@ mobile workspace\n<span class="diff-remove">- grid-template-columns: 220px 1fr 330px;</span>\n<span class="diff-add">+ display: block;</span>\n<span class="diff-add">+ height: 100dvh;</span>\n\n@@ review panel\n<span class="diff-add">+ position: fixed;</span>\n<span class="diff-add">+ inset: 0;</span></div>`,logs:`<div class="logs-view"><span>$</span> npm run check\n✓ HTML structure\n✓ JavaScript syntax\n✓ Responsive layout\n\n<span>Preview completed in 1.2s</span></div>`};
+function tab(name){$('#reviewContent').innerHTML=views[name];$$('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===name))}$$('[data-tab]').forEach(b=>b.onclick=()=>tab(b.dataset.tab));tab('files');$$('[data-open-diff]').forEach(b=>b.onclick=()=>{tab('diff');openReview()});
+function overlay(open){$('#backdrop').classList.toggle('open',open)}function openReview(){ $('#reviewPanel').classList.add('open');overlay(true)}function closeReview(){$('#reviewPanel').classList.remove('open');overlay(false)}$('#reviewButton').onclick=openReview;$('#closeReview').onclick=closeReview;$('#openSessions').onclick=()=>{$('#sessionSidebar').classList.add('open');overlay(true)};$('#closeSessions').onclick=()=>{$('#sessionSidebar').classList.remove('open');overlay(false)};$('#backdrop').onclick=()=>{closeReview();$('#sessionSidebar').classList.remove('open')};$$('[data-mobile]').forEach(b=>b.onclick=()=>{if(b.dataset.mobile==='changes')openReview();if(b.dataset.mobile==='sessions'){$('#sessionSidebar').classList.add('open');overlay(true)}if(b.dataset.mobile==='project')toast($('#workspaceRepo').textContent+' · '+$('#workspaceBranch').textContent)});
+$$('[data-suggest]').forEach(b=>b.onclick=()=>{$('#promptInput').value=b.textContent;$('#promptInput').focus()});$('#promptForm').onsubmit=e=>{e.preventDefault();const value=$('#promptInput').value.trim();if(!value)return;$('#agentFeed').insertAdjacentHTML('beforeend',`<div class="user-bubble"></div><div class="agent-response">${lang==='ar'?'معاينة: حلّلت الطلب، وسأعرض التغييرات للمراجعة. لا يتم تنفيذ أي أمر فعلي.':'Preview: I analyzed the request and will show changes for review. No real command is executed.'}</div>`);$$('.user-bubble').at(-1).textContent=value;$('#promptInput').value='';$('#agentFeed').scrollTop=$('#agentFeed').scrollHeight};
+$('#commitButton').onclick=()=>{toast(lang==='ar'?'تمت محاكاة Commit — لم يُحفظ شيء':'Commit simulated — nothing was saved');$('#pushButton').disabled=false};$('#pushButton').onclick=()=>toast(lang==='ar'?'تمت محاكاة Push — GitHub غير متصل':'Push simulated — GitHub is not connected');$('.new-session').onclick=()=>{toast(lang==='ar'?'جلسة معاينة جديدة':'New preview session');$('#promptInput').value=''};
+applyPrefs();
 
-const $ = (id) => document.getElementById(id);
-const toast = (msg) => {
-  const el = $("toast");
-  el.textContent = msg;
-  el.classList.add("show");
-  setTimeout(() => el.classList.remove("show"), 2200);
-};
-
-document.querySelectorAll(".nav-item").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".nav-item").forEach(x => x.classList.remove("active"));
-    document.querySelectorAll(".view").forEach(x => x.classList.remove("active"));
-    btn.classList.add("active");
-    $(btn.dataset.view).classList.add("active");
-    $("pageTitle").textContent = btn.querySelector("span").textContent;
-    $("pageSubtitle").textContent =
-      btn.dataset.view === "dashboard" ? "Start coding from anywhere." :
-      btn.dataset.view === "projects" ? "Connect and open your repositories." :
-      btn.dataset.view === "providers" ? "Bring your own AI provider." :
-      "Manage the lightweight gateway.";
-  });
-});
-
-function launchOpenCode() {
-  window.open(state.openCodeUrl, "_blank", "noopener");
-}
-["launchOpenCode","launchProject","openProviders"].forEach(id => $(id).addEventListener("click", launchOpenCode));
-
-["connectGithub","connectGithub2"].forEach(id => $(id).addEventListener("click", () => {
-  toast("GitHub OAuth will be connected in the next step.");
-}));
-
-$("serverUrl").value = state.openCodeUrl;
-$("saveSettings").addEventListener("click", () => {
-  state.openCodeUrl = $("serverUrl").value.trim();
-  localStorage.setItem("openCodeUrl", state.openCodeUrl);
-  toast("Gateway settings saved in this browser.");
-});
-
-$("saveAd").addEventListener("click", () => {
-  $("adTitle").textContent = $("adminAdTitle").value;
-  $("adText").textContent = $("adminAdText").value;
-  $("adLink").href = $("adminAdLink").value || "#";
-  localStorage.setItem("adTitle", $("adminAdTitle").value);
-  localStorage.setItem("adText", $("adminAdText").value);
-  localStorage.setItem("adLink", $("adminAdLink").value);
-  toast("Ad updated.");
-});
-
-const savedAdTitle = localStorage.getItem("adTitle");
-const savedAdText = localStorage.getItem("adText");
-const savedAdLink = localStorage.getItem("adLink");
-if (savedAdTitle) $("adTitle").textContent = $("adminAdTitle").value = savedAdTitle;
-if (savedAdText) $("adText").textContent = $("adminAdText").value = savedAdText;
-if (savedAdLink) $("adLink").href = $("adminAdLink").value = savedAdLink;
-
-$("themeToggle").addEventListener("click", () => {
-  document.documentElement.classList.toggle("light");
-  $("themeToggle").textContent = document.documentElement.classList.contains("light") ? "☀" : "☾";
-});
-
-async function checkServer() {
-  // Cross-origin responses may be blocked before CORS is configured,
-  // so this is a friendly visual indicator rather than a hard health check.
-  try {
-    await fetch(state.openCodeUrl, { mode: "no-cors", cache: "no-store" });
-    $("serverStatus").textContent = "Server reachable";
-  } catch {
-    $("serverStatus").textContent = "Server status unknown";
-  }
-}
-checkServer();
+// Phase 1 account API integration. GitHub/OpenCode/payment flows remain simulated.
+const api=async(path,options={})=>{const response=await fetch(path,{credentials:'same-origin',headers:{'Content-Type':'application/json',...(options.headers||{})},...options});if(response.status===204)return null;const body=await response.json().catch(()=>({detail:'Unexpected server response'}));if(!response.ok)throw new Error(Array.isArray(body.detail)?body.detail.map(x=>x.msg).join(', '):(body.detail||'Request failed'));return body};
+function apiMessage(id,text,error=false){const el=$('#'+id);el.textContent=text;el.className='api-message show'+(error?' error':'')}
+function value(id){return $('#'+id).value.trim()}
+async function fillSelect(selectId,path,placeholder){const select=$('#'+selectId);select.innerHTML=`<option value="">${placeholder}</option>`;if(!path)return;for(const item of await api(path)){const option=document.createElement('option');option.value=item.id;option.textContent=item.name;select.append(option)}}
+async function loadCountries(){try{await fillSelect('registerCountry','/api/locations/countries','Select country')}catch(error){apiMessage('registerMessage',error.message,true)}}
+$('#registerCountry').onchange=async()=>{await fillSelect('registerRegion',value('registerCountry')?`/api/locations/countries/${value('registerCountry')}/regions`:null,'Optional');await fillSelect('registerCity',null,'Optional')};
+$('#registerRegion').onchange=()=>fillSelect('registerCity',value('registerRegion')?`/api/locations/regions/${value('registerRegion')}/cities`:null,'Optional');
+$('#registerSubmit').onclick=async()=>{const button=$('#registerSubmit');button.disabled=true;try{const user=await api('/api/auth/register',{method:'POST',body:JSON.stringify({username:value('registerUsername'),email:value('registerEmail'),password:value('registerPassword'),phone:value('registerPhone'),postal_code:value('registerPostal'),country_id:Number(value('registerCountry')),region_id:value('registerRegion')?Number(value('registerRegion')):null,city_id:value('registerCity')?Number(value('registerCity')):null})});renderProfile(user);page('accountPage')}catch(error){apiMessage('registerMessage',error.message,true)}finally{button.disabled=false}};
+$('#loginSubmit').onclick=async()=>{const button=$('#loginSubmit');button.disabled=true;try{const user=await api('/api/auth/login',{method:'POST',body:JSON.stringify({identity:value('loginIdentity'),password:value('loginPassword')})});renderProfile(user);page('accountPage')}catch(error){apiMessage('loginMessage',error.message,true)}finally{button.disabled=false}};
+$('[data-start-onboarding]').onclick=()=>{page('onboarding');step(1)};
+function renderProfile(user){$('#profileStatus').textContent=user.status;$('#profileTrial').textContent=`${user.trial_remaining_days} trial days remaining · ends ${new Date(user.trial_ends_at).toLocaleDateString()}`;$('#profileUsername').firstChild.textContent=user.username;$('#profileEmail').firstChild.textContent=user.email;$('#profilePhone').firstChild.textContent=user.phone;$('#profileLocation').firstChild.textContent=[user.country,user.region,user.city,user.postal_code].filter(Boolean).join(' · ');$('#profilePreferences').firstChild.textContent=`${user.preferred_language} · ${user.preferred_theme}`}
+async function loadProfile(){try{renderProfile(await api('/api/profile'))}catch(error){page('authPage');apiMessage('loginMessage',error.message,true)}}
+$('#logoutButton').onclick=async()=>{await api('/api/auth/logout',{method:'POST'});page('authPage');apiMessage('loginMessage','Logged out successfully')};
+$$('[data-go="accountPage"]').forEach(button=>button.onclick=()=>{page('accountPage');loadProfile()});
+function tableCell(row,text,small){const td=document.createElement('td');const main=document.createElement(small?'b':'span');main.textContent=text??'—';td.append(main);if(small){const hint=document.createElement('small');hint.textContent=small;td.append(hint)}row.append(td)}
+async function loadAdminUsers(){const body=$('#adminUsersBody');try{const users=await api('/api/admin/users');body.innerHTML='';for(const user of users){const row=document.createElement('tr');tableCell(row,user.username,user.email);tableCell(row,user.phone);tableCell(row,[user.country,user.region,user.city].filter(Boolean).join(' · '),`ZIP ${user.postal_code}`);tableCell(row,user.trial_remaining_days?'Active':'Expired',`${user.trial_remaining_days} days`);tableCell(row,'Preview');tableCell(row,`${new Date(user.trial_started_at).toLocaleDateString()}–${new Date(user.trial_ends_at).toLocaleDateString()}`);tableCell(row,`${user.trial_remaining_days} days`);tableCell(row,'UI only');tableCell(row,'—');tableCell(row,user.last_login_at?new Date(user.last_login_at).toLocaleString():'Never');tableCell(row,user.status);body.append(row)}}catch(error){body.innerHTML='';const row=document.createElement('tr');const td=document.createElement('td');td.colSpan=11;td.textContent=error.message;row.append(td);body.append(row)}}
+$$('[data-go="adminPage"]').forEach(button=>button.onclick=()=>{page('adminPage');loadAdminUsers()});
+loadCountries();

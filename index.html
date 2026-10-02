@@ -1,203 +1,115 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OpenCode Gateway</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#091412"><title>OpenCode Gateway — Hosted OpenCode</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-mark">OC</div>
-        <div>
-          <div class="brand-title">OpenCode Gateway</div>
-          <div class="brand-sub">Your GitHub. Your AI. Your Code.</div>
-        </div>
+  <svg class="icon-sprite" aria-hidden="true"><symbol id="icon-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .8a11.4 11.4 0 0 0-3.6 22.2c.6.1.8-.2.8-.6v-2.2c-3.4.7-4.1-1.4-4.1-1.4-.5-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.8.1-.8 1.3.1 1.9 1.3 1.9 1.3 1.1 1.9 2.9 1.4 3.6 1.1.1-.8.4-1.4.8-1.7-2.7-.3-5.5-1.4-5.5-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.1 1.2a10.8 10.8 0 0 1 5.7 0C15.1 4.7 16 5 16 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.8 5.4-5.5 5.7.4.4.8 1.1.8 2.2v3.3c0 .4.2.7.8.6A11.4 11.4 0 0 0 12 .8Z"/></symbol><symbol id="icon-opencode" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m8 5-5 7 5 7M16 5l5 7-5 7M14 3l-4 18"/></symbol></svg>
+  <header class="site-header" id="siteHeader">
+    <button class="brand" data-go="landing"><span class="logo"><svg><use href="#icon-opencode"/></svg></span><span>OpenCode <b>Gateway</b></span></button>
+    <nav><button data-scroll="workflow" data-i18n="how">كيف يعمل</button><button data-scroll="preview" data-i18n="workspace">مساحة العمل</button><button data-go="accountPage">Account</button><button data-go="adminPage">Admin</button></nav>
+    <div class="header-actions"><button class="icon" id="themeBtn" aria-label="Theme">◐</button><button class="icon" id="langBtn">EN</button><button class="button small" data-start data-i18n="connect">اربط GitHub</button></div>
+  </header>
+
+  <main class="page active" id="landing">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <span class="eyebrow"><i></i> Hosted OpenCode · Your GitHub · Your AI</span>
+        <h1 data-i18n="heroTitle">اربط GitHub. افتح مشروعك في OpenCode. برمج بذكائك الاصطناعي.</h1>
+        <p data-i18n="heroBody">افتح مشروعك في مساحة OpenCode مؤقتة، اطلب التغيير من Agent، راجع كل ملف، ثم أعده إلى GitHub.</p>
+        <div class="actions"><button class="button" data-start><svg class="inline-icon"><use href="#icon-github"/></svg><span data-i18n="connect">اربط GitHub</span></button><button class="button ghost" data-demo data-i18n="seeDemo">شاهد مساحة العمل</button></div>
+        <div class="trust"><span>✓ <b data-i18n="sourceTruth">GitHub يبقى مصدر الحقيقة</b></span><span>✓ <b data-i18n="ownAi">استخدم مزود AI الخاص بك</b></span></div>
       </div>
-
-      <nav class="nav">
-        <button class="nav-item active" data-view="dashboard">◫ <span>Dashboard</span></button>
-        <button class="nav-item" data-view="projects">⌘ <span>Projects</span></button>
-        <button class="nav-item" data-view="providers">✦ <span>AI Providers</span></button>
-        <button class="nav-item" data-view="admin">⚙ <span>Admin</span></button>
-      </nav>
-
-      <div class="sidebar-foot">
-        <div class="status-dot"></div>
-        <div>
-          <strong>OpenCode Online</strong>
-          <small id="serverStatus">Checking server…</small>
+      <div class="hero-visual">
+        <div class="mini-window">
+          <div class="window-top"><span class="traffic">● ● ●</span><span>gateway / live session</span><span class="online">● Ready</span></div>
+          <div class="mini-context"><b>diirzoro/opencode-gateway</b><code>ui-redesign</code></div>
+          <div class="mini-message"><span class="agent-avatar">OC</span><div><small>OpenCode Agent</small><b data-i18n="miniTask">سأحسّن تجربة مساحة العمل على الهاتف.</b><p><em>✓</em> Read 8 files<br><em>✓</em> Updated 3 files<br><em>✓</em> Checks passed</p></div></div>
+          <div class="mini-result"><span><b>3</b> files changed</span><button data-demo>Review diff →</button></div>
         </div>
+        <div class="yemen-card"><img src="assets/yemen-hero.svg" alt="Sana'a architecture"><span><b data-i18n="fromYemen">من اليمن</b><small data-i18n="forDev">للمطورين في كل مكان</small></span></div>
       </div>
-    </aside>
+    </section>
 
-    <main class="main">
-      <header class="topbar">
-        <div>
-          <h1 id="pageTitle">Dashboard</h1>
-          <p id="pageSubtitle">Start coding from anywhere.</p>
-        </div>
-        <div class="top-actions">
-          <button class="ghost" id="themeToggle">☾</button>
-          <div class="avatar">T</div>
-        </div>
-      </header>
+    <section class="pipeline wrap" id="workflow" aria-label="Product workflow">
+      <article><span>01</span><i class="github-icon"><svg><use href="#icon-github"/></svg></i><b>GitHub</b><small data-i18n="pipe1">اربط حسابك</small></article><u>→</u>
+      <article><span>02</span><i>⌘</i><b data-i18n="repo">المستودع</b><small>Repository / Branch</small></article><u>→</u>
+      <article><span>03</span><i><svg><use href="#icon-opencode"/></svg></i><b>OpenCode</b><small data-i18n="tempSpace">مساحة مؤقتة</small></article><u>→</u>
+      <article><span>04</span><i>✦</i><b>AI Agent</b><small data-i18n="askChange">اطلب التغيير</small></article><u>→</u>
+      <article><span>05</span><i>±</i><b data-i18n="review">المراجعة</b><small>Files / Diff / Logs</small></article><u>→</u>
+      <article><span>06</span><i>↑</i><b>Push</b><small data-i18n="backGithub">إلى GitHub</small></article>
+    </section>
 
-      <section id="dashboard" class="view active">
-        <div class="hero card">
-          <div class="hero-copy">
-            <span class="eyebrow">Hosted OpenCode</span>
-            <h2>Open your project. Connect your AI. Start coding.</h2>
-            <p>No local setup. No IDE installation. Your project remains in your GitHub account.</p>
-            <div class="hero-actions">
-              <button class="primary" id="connectGithub">Connect GitHub</button>
-              <button class="secondary" id="launchOpenCode">Launch OpenCode</button>
-            </div>
-          </div>
-          <div class="hero-orbit">
-            <div class="orbit core">OC</div>
-            <div class="orbit item github">GH</div>
-            <div class="orbit item ai">AI</div>
-            <div class="orbit item code">&lt;/&gt;</div>
-          </div>
-        </div>
+    <section class="product wrap" id="preview">
+      <div class="section-copy"><span class="eyebrow">MISSION CONTROL</span><h2 data-i18n="onePlace">مكان واحد من الطلب إلى الـPush.</h2><p data-i18n="onePlaceBody">المحادثة في المنتصف، سياق المشروع دائمًا واضح، والمراجعة بجانبك عندما تحتاجها.</p></div>
+      <div class="product-shot">
+        <div class="shot-side"><b>&lt;/&gt;</b><span class="active">✦ Agent</span><span>⌘ Sessions</span><span>± Changes <i>3</i></span></div>
+        <div class="shot-main"><small>opencode-gateway / ui-redesign</small><h3 data-i18n="shotQuestion">حسّن تجربة الهاتف بدون تغيير سطح المكتب</h3><div class="activity">✓ Analyzed layout<br>✓ Edited styles.css<br>● Running responsive checks…</div><div class="fake-prompt" data-i18n="prompt">اطلب تغييرًا جديدًا… <b>↑</b></div></div>
+        <div class="shot-review"><b>Changes <i>3</i></b><span>styles.css <em>+42</em></span><span>app.js <em>+18</em></span><span>index.html <em>+12</em></span><button>Review changes</button></div>
+      </div>
+    </section>
 
-        <div class="grid stats">
-          <div class="card stat">
-            <span>OpenCode</span>
-            <strong>Ready</strong>
-            <small>Web service available</small>
-          </div>
-          <div class="card stat">
-            <span>GitHub</span>
-            <strong id="githubState">Not connected</strong>
-            <small>OAuth integration next</small>
-          </div>
-          <div class="card stat">
-            <span>Active project</span>
-            <strong>Madarasati</strong>
-            <small>Private test workspace</small>
-          </div>
-          <div class="card stat">
-            <span>Plan</span>
-            <strong>Owner / Test</strong>
-            <small>Billing disabled</small>
-          </div>
-        </div>
+    <section class="principles wrap"><article><i>⌘</i><h3 data-i18n="temporary">مساحات مؤقتة</h3><p data-i18n="temporaryBody">اعمل على نسخة معزولة، بينما يبقى الكود الدائم في GitHub.</p></article><article><i>✦</i><h3 data-i18n="yourModel">ذكاؤك الاصطناعي</h3><p data-i18n="yourModelBody">اربط المزود الذي تختاره عبر OpenCode.</p></article><article><i>±</i><h3 data-i18n="reviewFirst">راجع قبل الإرسال</h3><p data-i18n="reviewFirstBody">شاهد الملفات والفرق والسجلات قبل Commit وPush.</p></article></section>
+    <section class="final-cta wrap"><span>&lt;/&gt;</span><div><h2 data-i18n="ready">مشروعك التالي جاهز لـOpenCode.</h2><p data-i18n="previewOnly">هذه معاينة تفاعلية؛ لا يوجد اتصال فعلي بعد.</p></div><button class="button" data-start data-i18n="startFlow">ابدأ المسار</button></section>
+    <footer class="wrap"><b>OpenCode Gateway</b><span>Hosted OpenCode. Your GitHub. Your AI.</span><small>Built from Yemen for developers everywhere.</small></footer>
+  </main>
 
-        <div class="grid content-grid">
-          <div class="card project-card">
-            <div class="card-head">
-              <div>
-                <span class="eyebrow">Quick launch</span>
-                <h3>Madarasati</h3>
-              </div>
-              <span class="pill">qoder-test</span>
-            </div>
+  <main class="page auth-page" id="authPage">
+    <div class="onboard-top"><button class="brand" data-go="landing"><span class="logo"><svg><use href="#icon-opencode"/></svg></span><span>OpenCode <b>Gateway</b></span></button><span class="preview-badge">ACCOUNT ACCESS · PHASE 1</span></div>
+    <section class="auth-shell">
+      <div class="auth-workflow"><span class="eyebrow">GITHUB + OPENCODE</span><h1>ابدأ من حسابك، وانتهِ بتغيير تراجعه وتدفعه إلى GitHub.</h1><ol><li><svg><use href="#icon-github"/></svg><b>Connect GitHub</b><small>Choose repository access</small></li><li><span>⑂</span><b>Repository + Branch</b><small>Select project context</small></li><li><svg><use href="#icon-opencode"/></svg><b>OpenCode workspace</b><small>Temporary and isolated</small></li><li><span>✦</span><b>AI Agent</b><small>Review before commit and push</small></li></ol></div>
+      <div class="auth-card"><div class="auth-tabs"><button class="active" data-auth-tab="login">Login</button><button data-auth-tab="register">Create account</button></div>
+        <div class="auth-form active" data-auth-form="login"><h2>Welcome back</h2><p>Sign in with your username or email. Sessions use an HttpOnly cookie.</p><div class="api-message" id="loginMessage"></div><label>Email or username<input id="loginIdentity" autocomplete="username" placeholder="name@example.com"></label><label>Password<input id="loginPassword" type="password" autocomplete="current-password" placeholder="••••••••"></label><button class="text-link">Forgot password?</button><button class="button wide" id="loginSubmit">Login</button></div>
+        <div class="auth-form" data-auth-form="register"><h2>Create your account</h2><p>Creates a real account and starts a 10-day trial.</p><div class="api-message" id="registerMessage"></div><div class="field-grid"><label>Username<input id="registerUsername" autocomplete="username" placeholder="developer"></label><label>Country *<select id="registerCountry" required><option value="">Loading countries…</option></select></label></div><label>Email<input id="registerEmail" type="email" autocomplete="email" placeholder="name@example.com"></label><div class="field-grid"><label>Region<select id="registerRegion"><option value="">Optional</option></select></label><label>City<select id="registerCity"><option value="">Optional</option></select></label><label>Phone *<input id="registerPhone" required type="tel" autocomplete="tel" placeholder="+967 ..."></label><label>ZIP / Postal Code *<input id="registerPostal" required autocomplete="postal-code" placeholder="Required"></label></div><label>Password<input id="registerPassword" type="password" autocomplete="new-password" placeholder="10+ characters, letter and number"></label><button class="button wide" id="registerSubmit">Create account</button></div>
+        <div class="auth-divider">or</div><button class="github-button" data-start-onboarding><svg class="inline-icon"><use href="#icon-github"/></svg><b>Continue with GitHub</b></button>
+      </div>
+    </section>
+  </main>
 
-            <label>Repository</label>
-            <select id="repoSelect">
-              <option>diirzoro/madrasati</option>
-            </select>
+  <main class="page onboarding" id="onboarding">
+    <div class="onboard-top"><button class="brand" data-go="landing"><span class="logo"><svg><use href="#icon-opencode"/></svg></span><span>OpenCode <b>Gateway</b></span></button><div class="onboard-tools"><button class="icon lang-mirror">EN</button><button class="icon theme-mirror">◐</button></div></div>
+    <section class="onboard-shell">
+      <div class="onboard-story"><span class="eyebrow" data-i18n="setup">إعداد مساحة جديدة</span><h1 data-i18n="fewSteps">من GitHub إلى OpenCode في خطوات قليلة.</h1><p data-i18n="setupBody">نحفظ اختيار المشروع فقط. ملفات العمل تبقى مؤقتة وGitHub هو المصدر الدائم.</p><div class="story-flow"><span class="done">✓ <b data-i18n="account">الحساب</b></span><span id="storyGit"><i>2</i> GitHub</span><span id="storyRepo"><i>3</i> <b data-i18n="project">المشروع</b></span><span id="storyOpen"><i>4</i> OpenCode</span></div><div class="terminal-card" dir="ltr"><div>$ gateway start</div><p><span>source</span> github.com/your/project<br><span>engine</span> OpenCode<br><span>provider</span> Your AI<br><span>storage</span> temporary workspace</p></div></div>
+      <div class="onboard-panel">
+        <button class="back" data-go="landing">← <span data-i18n="back">رجوع</span></button>
+        <div class="step-pane active" data-step="1"><span class="step-count">01 / 03</span><h2 data-i18n="connectTitle">اربط GitHub للبدء</h2><p data-i18n="connectBody">سنطلب الوصول للمستودعات التي تختارها فقط. هذه الخطوة تجريبية الآن.</p><button class="github-button" id="mockConnect"><span>●</span><b data-i18n="continueGithub">المتابعة باستخدام GitHub</b></button><div class="safe-note">◇ <span data-i18n="noRealData">معاينة فقط — لا تُدخل أي بيانات حقيقية.</span></div></div>
+        <div class="step-pane" data-step="2"><span class="step-count">02 / 03</span><h2 data-i18n="chooseProject">اختر المشروع والفرع</h2><p data-i18n="chooseBody">هذا يحدد سياق مساحة العمل المؤقتة.</p><label>Repository<select id="onboardRepo"><option>diirzoro/opencode-gateway</option><option>diirzoro/example-project</option></select></label><label>Branch<select id="onboardBranch"><option>ui-redesign</option><option>work</option><option>main</option></select></label><button class="button wide" id="projectNext" data-i18n="continue">متابعة</button></div>
+        <div class="step-pane" data-step="3"><span class="step-count">03 / 03</span><h2 data-i18n="readyTitle">كل شيء جاهز.</h2><div class="ready-list"><span>✓ GitHub <b data-i18n="mockConnected">متصل تجريبيًا</b></span><span>✓ <b id="readyRepo">diirzoro/opencode-gateway</b></span><span>✓ <code id="readyBranch">ui-redesign</code></span><span>✓ OpenCode <b data-i18n="readyState">جاهز</b></span></div><button class="button wide" id="openWorkspace" data-i18n="openSpace">افتح مساحة العمل</button></div>
+      </div>
+    </section>
+  </main>
 
-            <label>Branch</label>
-            <select id="branchSelect">
-              <option>qoder-test</option>
-              <option>main</option>
-            </select>
-
-            <button class="primary wide" id="launchProject">Launch in OpenCode</button>
-          </div>
-
-          <div class="card ad-card">
-            <div class="card-head">
-              <div>
-                <span class="eyebrow">Sponsored</span>
-                <h3 id="adTitle">Your future ad space</h3>
-              </div>
-              <span class="pill muted">Admin controlled</span>
-            </div>
-            <p id="adText">A small, clean ad area that you can later manage from the admin section.</p>
-            <a id="adLink" href="#" target="_blank" rel="noopener">Learn more →</a>
-          </div>
-        </div>
+  <main class="page workspace-page" id="workspacePage">
+    <div class="workspace-shell">
+      <aside class="session-sidebar" id="sessionSidebar"><div class="side-brand"><span class="logo"><svg><use href="#icon-opencode"/></svg></span><b>Gateway</b><button class="mobile-close" id="closeSessions">×</button></div><button class="new-session">＋ <span data-i18n="newSession">جلسة جديدة</span></button><small data-i18n="sessions">الجلسات</small><button class="session active"><i>OG</i><span><b>Mobile workspace</b><small>opencode-gateway</small></span><em>●</em></button><button class="session"><i>API</i><span><b>Auth foundation</b><small>gateway-api</small></span></button><div class="side-spacer"></div><button class="side-link" data-go="landing">⌂ <span data-i18n="home">الرئيسية</span></button><button class="side-link">⚙ <span data-i18n="settings">الإعدادات</span></button><div class="user-chip"><i>DE</i><span><b>Demo owner</b><small>Preview workspace</small></span></div></aside>
+      <section class="workspace-center">
+        <header class="project-bar"><button class="mobile-menu" id="openSessions">☰</button><div class="repo-title"><i>⌘</i><span><b id="workspaceRepo">diirzoro/opencode-gateway</b><small><code id="workspaceBranch">ui-redesign</code> · <span data-i18n="tempWorkspace">Temporary workspace</span></small></span></div><div class="statuses"><span class="github-status"><svg><use href="#icon-github"/></svg><i></i> GitHub Connected</span><span class="opencode-status"><svg><use href="#icon-opencode"/></svg><i></i> OpenCode Ready</span><button class="icon workspace-theme">◐</button></div></header>
+        <div class="agent-feed" id="agentFeed"><div class="day-label" data-i18n="today">اليوم</div><article class="agent-intro"><div class="agent-avatar">OC</div><div><small>OpenCode Agent <time>10:42</time></small><h2 data-i18n="agentHello">ما الذي تريد تغييره في مشروعك؟</h2><p data-i18n="agentHelp">أصف المهمة وسأعرض خطوات التنفيذ، الملفات المعدّلة، ونتائج الفحص هنا.</p><div class="suggestions"><button data-suggest data-i18n="suggest1">حسّن تجربة الهاتف</button><button data-suggest data-i18n="suggest2">راجع بنية المشروع</button><button data-suggest data-i18n="suggest3">أصلح مشكلة في الواجهة</button></div></div></article><article class="execution-card"><header><b>OpenCode Agent · Completed</b><span class="state-ready">Ready for review</span></header><ul><li class="done">Reading files <code>8 files</code></li><li class="done">Analyzing workspace</li><li class="done">Editing <code>3 files</code></li><li class="done">Running responsive checks</li><li class="done">Tests passed</li></ul><footer><strong>3 files changed</strong><span>+72 −14</span><button data-open-diff>View Diff</button></footer></article></div>
+        <form class="prompt-box" id="promptForm"><textarea id="promptInput" rows="1" data-i18n-placeholder="prompt" placeholder="اطلب تغييرًا جديدًا…"></textarea><div><span class="mode">✦ Agent</span><span class="provider">OpenCode · Your AI</span><button type="submit" aria-label="Send">↑</button></div></form>
+        <nav class="mobile-nav"><button class="active" data-mobile="agent">✦<span>Agent</span></button><button data-mobile="sessions">⌘<span data-i18n="sessions">الجلسات</span></button><button data-mobile="changes">±<span data-i18n="changes">التغييرات</span><i>3</i></button><button data-mobile="project">◈<span data-i18n="project">المشروع</span></button></nav>
       </section>
-
-      <section id="projects" class="view">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Projects</span>
-            <h2>Your connected repositories</h2>
-          </div>
-          <button class="primary" id="connectGithub2">Connect GitHub</button>
-        </div>
-        <div class="card empty-state">
-          <div class="big-icon">⌘</div>
-          <h3>GitHub connector is the next step</h3>
-          <p>Once connected, repositories and branches will appear here automatically.</p>
-        </div>
-      </section>
-
-      <section id="providers" class="view">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">AI</span>
-            <h2>Use OpenCode’s own provider setup</h2>
-          </div>
-        </div>
-        <div class="grid provider-grid">
-          <div class="card provider"><strong>OpenAI / Codex</strong><span>Use OpenCode settings</span></div>
-          <div class="card provider"><strong>DeepSeek</strong><span>Use your own API</span></div>
-          <div class="card provider"><strong>Gemini</strong><span>Use your own API</span></div>
-          <div class="card provider"><strong>Other providers</strong><span>Managed inside OpenCode</span></div>
-        </div>
-        <button class="primary" id="openProviders">Open OpenCode Settings</button>
-      </section>
-
-      <section id="admin" class="view">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Admin</span>
-            <h2>Small control center</h2>
-          </div>
-          <span class="pill">Owner only</span>
-        </div>
-
-        <div class="grid admin-grid">
-          <div class="card">
-            <h3>Advertisement</h3>
-            <label>Title</label>
-            <input id="adminAdTitle" value="Your future ad space" />
-            <label>Text</label>
-            <textarea id="adminAdText">A small, clean ad area that you can later manage from the admin section.</textarea>
-            <label>Link</label>
-            <input id="adminAdLink" value="#" />
-            <button class="primary wide" id="saveAd">Save ad</button>
-          </div>
-
-          <div class="card">
-            <h3>Gateway settings</h3>
-            <label>OpenCode URL</label>
-            <input id="serverUrl" />
-            <label>Display name</label>
-            <input id="displayName" value="OpenCode Gateway" />
-            <button class="secondary wide" id="saveSettings">Save settings</button>
-            <p class="hint">For now settings are stored only in this browser. Later they can move to PostgreSQL.</p>
-          </div>
-        </div>
-      </section>
-
-      <footer>
-        <span>OpenCode Gateway MVP</span>
-        <span>Built for a lightweight hosted workflow</span>
-      </footer>
-    </main>
-  </div>
-
-  <div class="toast" id="toast"></div>
-  <script src="config.js"></script>
+      <aside class="review-panel" id="reviewPanel"><div class="review-head"><div><b data-i18n="changes">التغييرات</b><span>3 files · +72 −14</span></div><button class="mobile-close" id="closeReview">×</button></div><div class="review-tabs"><button class="active" data-tab="files">Files</button><button data-tab="diff">Diff</button><button data-tab="logs">Logs</button></div><div class="review-content" id="reviewContent"></div><div class="review-footer"><button class="button ghost" id="reviewButton" data-i18n="viewChanges">عرض التغييرات</button><div><button class="button ghost" id="commitButton">Commit</button><button class="button" id="pushButton" disabled>Push</button></div><small data-i18n="simulation">محاكاة واجهة فقط — لن يتم إرسال أي تغيير.</small></div></aside>
+    </div>
+  </main>
+  <main class="page portal-page" id="accountPage"><header class="portal-header"><button class="brand" data-go="landing"><span class="logo"><svg><use href="#icon-opencode"/></svg></span><span>OpenCode <b>Gateway</b></span></button><span class="preview-badge">ACCOUNT · DATABASE BACKED</span><button class="text-link" id="logoutButton">Logout</button><button class="button ghost" data-demo>Open workspace</button></header><section class="portal-shell"><aside class="portal-nav"><b>Account</b><button class="active">Profile</button><button>GitHub connection</button><button data-go="billingPage">Plan & billing</button><button>AI provider</button><button>Sessions</button><button>Security</button></aside><div class="portal-content"><span class="eyebrow">CUSTOMER ACCOUNT</span><h1>Account and connections</h1><p class="lead">A simple control area separate from your coding workspace.</p><div class="account-grid"><article><small>Account status</small><h3><i class="status-dot"></i> <span id="profileStatus">Loading…</span></h3><p id="profileTrial">—</p></article><article><small>GitHub</small><h3><svg><use href="#icon-github"/></svg> Preview connected</h3><p>2 repositories available</p></article><article><small>AI provider</small><h3><svg><use href="#icon-opencode"/></svg> Not configured</h3><p>Your keys will be encrypted later.</p></article></div><section class="settings-list"><h2>Profile</h2><div><span id="profileUsername">—<small>Username</small></span></div><div><span id="profileEmail">—<small>Email</small></span></div><div><span id="profilePhone">—<small>Phone</small></span></div><div><span id="profileLocation">—<small>Location / postal code</small></span></div><div><span id="profilePreferences">—<small>Language / theme</small></span></div></section></div></section></main>
+  <main class="page portal-page" id="billingPage">
+    <header class="portal-header"><button class="brand" data-go="landing"><span class="logo"><svg><use href="#icon-opencode"/></svg></span><span>OpenCode <b>Gateway</b></span></button><span class="preview-badge">BILLING · UI ONLY</span><button class="button ghost" data-go="accountPage">Account</button></header>
+    <section class="portal-shell"><aside class="portal-nav"><b>Account</b><button data-go="accountPage">Profile</button><button class="active">Plan & billing</button><button>Payment methods</button><button>Payment history</button><button>Billing profile</button></aside>
+      <div class="portal-content billing-content"><span class="eyebrow">PLAN & SUBSCRIPTION</span><h1>Billing and subscription</h1><p class="lead">Complete product preview only—no payment is collected.</p>
+        <div class="subscription-card"><div><span class="pill success">Trial active</span><h2>Developer Trial</h2><p>Trial: Oct 1–10, 2026 · <b>8 days remaining</b></p></div><div class="subscription-dates"><span><small>Subscription</small>Not started</span><span><small>Renewal date</small>—</span><span><small>Account</small>Active</span></div><button class="button">Choose plan</button></div>
+        <div class="billing-grid"><section class="billing-section"><header><div><small>PAYMENT METHODS</small><h2>Choose how to pay</h2></div><span class="preview-badge">SIMULATED</span></header><div class="payment-options"><button class="payment-option active" data-payment="paypal"><b>PayPal</b><small>Fast online payment preview</small></button><button class="payment-option" data-payment="bank"><b>Bank Transfer</b><small>Upload a receipt for review</small></button></div><div class="payment-details active" data-payment-panel="paypal"><label>Plan<select><option>Developer — $19/month</option><option>Pro — $39/month</option></select></label><div class="field-grid"><label>Billing period<select><option>Monthly</option><option>Yearly</option></select></label><label>Amount<input value="$19.00" readonly></label></div><button class="button wide" data-preview-action>Continue to PayPal preview</button></div><div class="payment-details" data-payment-panel="bank"><div class="bank-details"><span><small>Bank name</small>Gateway Demo Bank</span><span><small>Account name</small>OpenCode Gateway</span><span><small>IBAN</small>YE00 0000 0000 0000</span><span><small>SWIFT / BIC</small>DEMOYE00</span></div><label>Reference number<input placeholder="Transfer reference"></label><label class="upload-box">Upload payment receipt<input type="file" accept="image/*,.pdf"><small>PNG, JPG, or PDF · UI preview only</small></label><button class="button wide" data-preview-action>Submit for review</button></div></section>
+          <section class="billing-section"><header><div><small>BILLING PROFILE</small><h2>Required invoice details</h2></div></header><div class="field-grid"><label>Full name<input placeholder="Full legal name"></label><label>Country *<select required><option>Yemen</option><option>Saudi Arabia</option><option>United Arab Emirates</option></select></label><label>Region / Area / State<select><option>Sana'a</option><option>Aden</option></select></label><label>City<input placeholder="City"></label><label>ZIP / Postal Code *<input required placeholder="Required"></label><label>Phone *<input required type="tel" placeholder="+967 ..."></label></div><label>Email<input type="email" placeholder="billing@example.com"></label><button class="button ghost" data-preview-action>Save billing profile</button></section></div>
+        <section class="billing-section payment-history"><header><div><small>PAYMENT HISTORY</small><h2>Recent payments</h2></div></header><div class="table-wrap"><table><thead><tr><th>Date</th><th>Plan</th><th>Period</th><th>Amount</th><th>Method</th><th>Status</th></tr></thead><tbody><tr><td>Oct 02, 2026</td><td>Developer</td><td>Monthly</td><td>$19.00</td><td>Bank Transfer</td><td><span class="pill warning">Pending</span></td></tr><tr><td>Sep 01, 2026</td><td>Developer</td><td>Monthly</td><td>$19.00</td><td>PayPal</td><td><span class="pill success">Paid · Approved</span></td></tr><tr><td>Aug 01, 2026</td><td>Developer</td><td>Monthly</td><td>$19.00</td><td>PayPal</td><td><span class="pill danger">Failed</span></td></tr></tbody></table></div></section>
+      </div></section>
+  </main>
+  <main class="page portal-page" id="adminPage"><header class="portal-header"><button class="brand" data-go="landing"><span class="logo"><svg><use href="#icon-opencode"/></svg></span><span>Gateway <b>Admin</b></span></button><span class="preview-badge">ADMIN · UI ONLY</span></header><section class="admin-shell"><aside class="portal-nav"><b>Operations</b><button class="active">Overview</button><button>Users</button><button>Payments</button><button>Countries & regions</button><button>Sessions</button><button>Activity logs</button><button>Security logs</button><button>Settings</button></aside><div class="portal-content admin-content"><span class="eyebrow">ADMIN CONSOLE</span><h1>Operations overview</h1><p class="lead">Compact operational statistics and management—no business analytics charts.</p>
+  <div class="stat-grid"><article><small>Visitors</small><b>1,284</b></article><article><small>Registered</small><b>248</b></article><article><small>Active users</small><b>173</b></article><article><small>Trial users</small><b>61</b></article><article><small>Trial expired</small><b>19</b></article><article><small>Paid users</small><b>94</b></article><article><small>Unpaid users</small><b>32</b></article><article><small>Expired</small><b>12</b></article><article><small>Expiring soon</small><b>16</b></article><article><small>Total payments</small><b>$4,821</b></article><article class="attention"><small>Pending bank</small><b>7</b></article></div>
+  <section class="admin-section"><header><div><small>USERS & SUBSCRIPTIONS</small><h2>User management</h2></div><button>Export preview</button></header><div class="table-wrap wide-table"><table><thead><tr><th>Name / Email</th><th>Phone</th><th>Location</th><th>Trial</th><th>Plan</th><th>Subscription</th><th>Remaining</th><th>Payment</th><th>Method</th><th>Last login</th><th>Actions</th></tr></thead><tbody id="adminUsersBody"><tr><td><b>Demo owner</b><small>owner@example.com</small></td><td>+967 000 000</td><td>Yemen · Sana'a<small>ZIP 00000</small></td><td>Active<small>8 days</small></td><td>Developer</td><td>Oct 10–Nov 10</td><td>1 month</td><td><span class="pill success">Paid</span></td><td>PayPal</td><td>Today</td><td><button class="row-menu">Manage</button></td></tr><tr><td><b>Preview user</b><small>user@example.com</small></td><td>+966 000 000</td><td>Saudi Arabia · Riyadh<small>ZIP 11564</small></td><td>Expired<small>0 days</small></td><td>Pro</td><td>Pending</td><td>—</td><td><span class="pill warning">Pending</span></td><td>Bank</td><td>Yesterday</td><td><button class="row-menu">Review</button></td></tr></tbody></table></div><div class="admin-actions"><button>Activate</button><button>Suspend</button><button>Extend trial</button><button>Change plan</button><button>Add time</button><button>Reduce time</button><button>Mark paid / unpaid</button><button>Review bank payment</button></div></section>
+  <section class="admin-section"><header><div><small>LOCATION MANAGEMENT</small><h2>Countries, regions, and cities</h2></div><div><button>Add country</button><button>Add region</button></div></header><div class="location-grid"><article><b>Yemen</b><span class="pill success">Enabled</span><small>22 regions · 333 cities</small><button>Edit</button></article><article><b>Saudi Arabia</b><span class="pill success">Enabled</span><small>13 regions</small><button>Edit</button></article><article><b>United Arab Emirates</b><span class="pill">Disabled</span><small>7 emirates</small><button>Edit</button></article></div><div class="region-row"><span><b>Sana'a</b><small>Yemen · Region / Area</small></span><button class="toggle-on">Enabled</button><button>Edit</button></div><div class="region-row"><span><b>Aden</b><small>Yemen · Region / Area</small></span><button class="toggle-on">Enabled</button><button>Edit</button></div></section>
+  </div></section></main>
+  <div class="toast" id="toast"></div><div class="backdrop" id="backdrop"></div>
   <script src="app.js"></script>
 </body>
 </html>
