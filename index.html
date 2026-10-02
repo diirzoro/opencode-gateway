@@ -34,13 +34,13 @@
   <main id="landing" class="page active">
     <section class="hero">
       <div class="hero-copy">
-        <div class="hero-badge">🚀 <span data-i18n="heroBadge">من اليمن إلى كل مبرمج في العالم</span></div>
-        <h1 data-i18n="heroTitle">برمج من أي مكان، بحسابك ومشروعك</h1>
-        <p data-i18n="heroText">اربط حسابك في GitHub وافتح OpenCode مباشرة من المتصفح، واستخدم مزود الذكاء الاصطناعي الخاص بك في بيئة بسيطة وسريعة.</p>
+        <div class="hero-badge"><span class="platform-chip github-chip">GitHub</span><span class="platform-arrow">→</span><span class="platform-chip opencode-chip">OpenCode</span></div>
+        <h1 data-i18n="heroTitle">اربط GitHub وافتح OpenCode على مشروعك مباشرة</h1>
+        <p data-i18n="heroText">اختر المستودع والفرع، افتح OpenCode من المتصفح، واكتب طلبك للـAgent ليعمل على مشروع GitHub الخاص بك.</p>
 
         <div class="hero-actions">
           <button class="primary large" id="startFree" data-i18n="tryFree">ابدأ 10 أيام مجانًا</button>
-          <button class="secondary large" id="connectGithub">◉ GitHub</button>
+          <button class="secondary large" id="connectGithub">◉ ربط GitHub</button>
         </div>
 
         <div class="hero-points">
@@ -51,7 +51,7 @@
       </div>
 
       <div class="hero-photo">
-        <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Sanaa%20banner.jpg" alt="Old Yemeni architecture" />
+        <img src="./assets/yemen-hero.svg" alt="Old Yemeni architecture" />
         <div class="photo-note">
           <strong data-i18n="sanaaTitle">صنعاء القديمة</strong>
           <small data-i18n="sanaaText">حيث يلهم التاريخ المستقبل · Photo: CC BY 2.0</small>
@@ -60,16 +60,28 @@
     </section>
 
     <section class="stats-row">
-      <article><span class="stat-icon people">●●</span><div><small data-i18n="registeredUsers">المستخدمون المسجلون</small><strong>12,480</strong><em>+12%</em></div></article>
-      <article><span class="stat-icon folder">▰</span><div><small data-i18n="activeProjects">المشاريع النشطة</small><strong>3,260</strong><em>+18%</em></div></article>
-      <article><span class="stat-icon stack">◆</span><div><small data-i18n="services">الخدمات المتاحة</small><strong>8</strong><em>+2</em></div></article>
-      <article><span class="stat-icon users">◎</span><div><small data-i18n="community">المشاركون</small><strong>4,950</strong><em>+22%</em></div></article>
+      <article><span class="stat-icon people">●●</span><div><small data-i18n="connectedRepos">مستودعات GitHub المرتبطة</small><strong>12,480</strong><em>+12%</em></div></article>
+      <article><span class="stat-icon folder">▰</span><div><small data-i18n="openCodeSessions">جلسات OpenCode</small><strong>3,260</strong><em>+18%</em></div></article>
+      <article><span class="stat-icon stack">◆</span><div><small data-i18n="agentRuns">طلبات الـAgent</small><strong>8</strong><em>+2</em></div></article>
+      <article><span class="stat-icon users">◎</span><div><small data-i18n="activeDevelopers">المطورون النشطون</small><strong>4,950</strong><em>+22%</em></div></article>
+    </section>
+
+    <section class="how-it-works">
+      <div class="how-title">
+        <span class="eyebrow">GitHub + OpenCode</span>
+        <h2 data-i18n="howTitle">ثلاث خطوات وتبدأ البرمجة</h2>
+      </div>
+      <div class="steps">
+        <article><span>1</span><div><b data-i18n="howOne">اربط GitHub</b><small data-i18n="howOneText">اختر حسابك والمستودع الذي تريد العمل عليه.</small></div></article>
+        <article><span>2</span><div><b data-i18n="howTwo">اختر المشروع والفرع</b><small data-i18n="howTwoText">OpenCode Gateway يجهز مساحة العمل للمشروع.</small></div></article>
+        <article><span>3</span><div><b data-i18n="howThree">اكتب طلبك لـ OpenCode</b><small data-i18n="howThreeText">راجع الملفات المعدلة ثم Commit وPush إلى GitHub.</small></div></article>
+      </div>
     </section>
 
     <section id="features" class="content-grid">
       <article class="workspace-preview card">
         <div class="preview-head">
-          <div class="preview-brand"><span class="mini-code">&lt;/&gt;</span><div><strong>OpenCode</strong><small data-i18n="browserIDE">بيئة تطوير كاملة في المتصفح</small></div></div>
+          <div class="preview-brand"><span class="mini-code">&lt;/&gt;</span><div><strong>OpenCode Workspace</strong><small data-i18n="browserIDE">مرتبط مباشرة بمستودع GitHub والفرع المختار</small></div></div>
           <button class="link-btn" id="openWorkspaceDemo" data-i18n="openWorkspace">فتح مساحة العمل ↗</button>
         </div>
         <div class="code-window">
@@ -141,7 +153,7 @@ app.get('/', (c) =&gt; {
   <main id="authPage" class="page auth-page">
     <section class="auth-shell">
       <div class="auth-visual">
-        <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Sanaa%20banner.jpg" alt="Yemen and OpenCode" />
+        <img src="./assets/yemen-hero.svg" alt="Yemen and OpenCode" />
         <div class="auth-overlay">
           <div class="auth-code-mark">&lt;/&gt;</div>
           <h2 data-i18n="authSideTitle">من GitHub إلى OpenCode في خطوات بسيطة</h2>
